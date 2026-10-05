@@ -452,25 +452,126 @@ Locked"** after 3 failed attempts.
 
 ```
 START
-
     SET Attempts = 0
-
     WHILE Attempts < 3
-
-        INPUT Password
-
-        IF Password = CorrectPassword THEN
-            DISPLAY "Access Granted"
-            END
-        ELSE
-            SET Attempts = Attempts + 1
-        END IF
-
+    INPUT Password
+    IF Password = CorrectPassword THEN
+    DISPLAY "Access Granted"
+    END
+    ELSE
+    SET Attempts = Attempts + 1
+    END IF
     END WHILE
-
     DISPLAY "Account Locked"
+END
+```
+
+### flowchart
+
+
+```mermaid
+flowchart TD
+    A([Start]) --> B[Set Attempts = 0]
+    B --> C{Attempts less than 3?}
+    C -->|Yes| D[/Input Password/]
+    D --> E{Password correct?}
+    E -->|Yes| F[/Display Access Granted/]
+    F --> G([End])
+    E -->|No| H[Attempts = Attempts + 1]
+    H --> C
+    C -->|No| I[/Display Account Locked/]
+    I --> G
+```
+
+
+## 14. Store Checkout with Multiple Items
+
+Write the algorithm and draw the flowchart for a program that inputs the
+number of items purchased, calculates the total purchase amount using a
+loop, and applies a **15% discount** if the total exceeds 5000 SEK.
+
+### pseducode
+
+```
+START
+
+    INPUT NumberOfItems
+    SET Total = 0
+    FOR i = 1 TO NumberOfItems
+    INPUT Price
+    SET Total = Total + Price
+    END FOR
+    IF Total > 5000 THEN
+    SET Discount = Total * 0.15
+    SET FinalAmount = Total - Discount
+    ELSE
+    SET FinalAmount = Total
+    END IF
+    DISPLAY FinalAmount
+    
+END
+```
+
+### flowchart
+
+
+
+```mermaid
+flowchart TD
+    A([Start]) --> B[/Input NumberOfItems/]
+    B --> C[Set Total = 0]
+    C --> D[Set i = 1]
+    D --> E{i <= NumberOfItems?}
+    E -->|Yes| F[/Input Item Price/]
+    F --> G[Total = Total + Price]
+    G --> H[i = i + 1]
+    H --> E
+    E -->|No| I{Total > 5000?}
+    I -->|Yes| J[Discount = Total * 0.15]
+    J --> K[FinalAmount = Total - Discount]
+    I -->|No| L[FinalAmount = Total]
+    K --> M[/Display FinalAmount/]
+    L --> M
+    M --> N([End])
+```
+## 15. Electricity Bill Calculator
+
+Write the algorithm and draw the flowchart for a program that inputs the
+number of electricity units consumed and calculates the total bill using
+the following rates: first 100 units at 1.5 SEK per unit, next 200
+units at 2.0 SEK per unit, and all remaining units at 3.0 SEK per unit.
+
+---
+## pseducode
+
+```
+START
+
+    INPUT Units
+    IF Units <= 100 THEN
+    Bill = Units * 1.5
+    ELSE IF Units <= 300 THEN
+    Bill = (100 * 1.5) + ((Units - 100) * 2.0)
+    ELSE
+    Bill = (100 * 1.5) + (200 * 2.0) + ((Units - 300) * 3.0)
+    END IF
+    DISPLAY Bill
 
 END
 ```
 
+## flowchart
 
+```mermaid
+flowchart TD
+    A([Start]) --> B[/Input Units/]
+    B --> C{Units <= 100?}
+    C -->|Yes| D[Bill = Units * 1.5]
+    C -->|No| E{Units <= 300?}
+    E -->|Yes| F[Bill = 100 * 1.5 + Units - 100 * 2.0]
+    E -->|No| G[Bill = 100 * 1.5 + 200 * 2.0 + Units - 300 * 3.0]
+    D --> H[/Display Bill/]
+    F --> H
+    G --> H
+    H --> I([End])
+```
